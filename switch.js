@@ -114,7 +114,6 @@ define(['jquery'], function($) {
 
                 var s = getSides($elem, $slider);
                 $slider.css('left', value ? s.right : s.left);
-                return this;
             });
         }
     };
