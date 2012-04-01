@@ -90,7 +90,7 @@ define(['jquery'], function($) {
                     var doToggle;
                     var isActivated = data.activated;
 
-                    if (data.customized !== undefined)
+                    if (data.customized !== null)
                         return true;
 
                     if (data.initialPageX === undefined) {
