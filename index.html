@@ -10,9 +10,14 @@
     <script>
       require(['jquery', 'switch'], function() {
         $(document).ready(function() {
-          $("div").switchify().on('changed', function(e, newValue) {
-            $("#out").append("Switch " + $(this).attr('id') + " is now " + (newValue ? "ON" : "OFF") + ".\n");
-          });
+          $("div").switchify().on({
+            changed: function(e, newValue) {
+              $("#out").append("Switch " + $(this).attr('id') + " is now " + (newValue ? "ON" : "OFF") + ".\n");
+            },
+
+            click: function() {
+              $("#out").append("Switch " + $(this).attr('id') + " has been clicked.\n");
+            }});
         });
       });
     </script>
@@ -22,6 +27,8 @@
     <h2><a href="https://github.com/magcius/gnome-switch">https://github.com/magcius/gnome-switch</a></h2>
     <div id="One"></div>
     <div id="Two" class="activated"></div>
+    <div id="Update" class="update">UPDATE</div>
+    <div id="Error" class="error">ERROR</div>
     <hr>
     <pre id="out"></pre>
   </body>

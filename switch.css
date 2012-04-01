@@ -62,16 +62,40 @@
     border-color: #5f5f5f;
 }
 
-._gnome-switch .off, ._gnome-switch .on {
+._gnome-switch .off,
+._gnome-switch .on,
+._gnome-switch.customized .custom-content {
     font-weight: bold;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
                  0 1px 0   rgba(0, 0, 0, 0.6);
-    /* 80px / 2 - 2px */
     border-style: solid;
     border-width: 2px;
-    width: 38px;
-    padding: 1px 0;
     text-align: center;
+    padding: 1px 0;
+}
+
+._gnome-switch .off,
+._gnome-switch .on {
+    /* 80px / 2 - 2px */
+    width: 38px;
+}
+
+._gnome-switch .custom-content {
+    /* To aid with writing style sheets, put the default color styles
+     * in a less specified selector, so they're easily overridden. */
+    display: none;
+
+    /* default colors */
+    background-color: #000000;
+    border-color: #2e3436;
+}
+
+._gnome-switch.customized .custom-content {
+    display: block;
+
+    /* 80px - 4px */
+    width: 76px;
+    border-radius: 4px;
 }
 
 ._gnome-switch .off {
@@ -88,4 +112,10 @@
     border-right-style: none;
     border-radius: 4px 0 0 4px;
     background-color: #4a90d9;
+}
+
+._gnome-switch.customized .on,
+._gnome-switch.customized .off,
+._gnome-switch.customized .slider {
+    display: none;
 }

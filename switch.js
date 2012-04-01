@@ -20,6 +20,7 @@ define(['jquery'], function($) {
                 if (!data) {
                     data = {};
                     data.activated = undefined;
+                    data.customized = undefined;
                     $elem.data('switch', data);
                 }
 
@@ -46,10 +47,17 @@ define(['jquery'], function($) {
                     return false;
                 }
 
+                var contents = $elem.text();
+                $elem.text('');
+
+                var classNames = $elem.attr('class');
+
                 $elem
+                    .removeClass()
                     .addClass('_gnome-switch')
                     .append($('<span>', {'class': 'on'}).text("ON"))
                     .append($('<span>', {'class': 'off'}).text("OFF"))
+                    .append($('<span>', {'class': 'custom-content'}))
                     .append($slider)
 
                 // Disable selection.
@@ -58,6 +66,8 @@ define(['jquery'], function($) {
                     .attr('unselectable', 'on')
                     .on('selectstart', function() { return false; });
 
+                if (contents)
+                    methods.customize.call($elem, contents, classNames);
                 methods.activate.call($elem, $elem.hasClass('activated'));
 
                 $slider.on('mousedown', function(e) {
@@ -78,6 +88,9 @@ define(['jquery'], function($) {
                     var doToggle;
                     var isActivated = data.activated;
 
+                    if (data.customized !== undefined)
+                        return true;
+
                     if (data.initialPageX === undefined) {
                         doToggle = true;
                     } else {
@@ -93,6 +106,7 @@ define(['jquery'], function($) {
                     if (doToggle)
                         methods.activate.call($elem, !isActivated);
 
+                    e.stopImmediatePropagation();
                     return false;
                 });
             });
@@ -114,6 +128,25 @@ define(['jquery'], function($) {
                 var $slider = $elem.find('span.slider');
                 var s = getSides($elem, $slider);
                 $slider.css('left', value ? s.right : s.left);
+            });
+        },
+
+        customize: function(label, styleClass) {
+            return this.each(function() {
+                var $elem = $(this);
+
+                var data = $elem.data('switch');
+                data.customized = true;
+
+                $elem.addClass('customized');
+
+                var $customContent = $elem.find('.custom-content');
+                $customContent.text(label);
+
+                $customContent.removeClass();
+                $customContent.addClass('custom-content');
+                if (styleClass)
+                    $customContent.addClass(styleClass);
             });
         }
     };
