@@ -10,7 +10,7 @@
     <script>
       require(['jquery', 'switch'], function() {
         $(document).ready(function() {
-          $("div").switchify().bind('changed', function(e, newValue) {
+          $("div").switchify().on('changed', function(e, newValue) {
             $("#out").append("Switch " + $(this).attr('id') + " is now " + (newValue ? "ON" : "OFF") + ".\n");
           });
         });
