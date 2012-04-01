@@ -101,7 +101,6 @@ define(['jquery'], function($) {
         activate: function(value) {
             return this.each(function() {
                 var $elem = $(this);
-                var $slider = $elem.find('span.slider');
 
                 var data = $elem.data('switch');
                 if (data.activated == value)
@@ -112,6 +111,7 @@ define(['jquery'], function($) {
                 $elem.trigger('changed', value);
                 $elem.toggleClass('activated', value);
 
+                var $slider = $elem.find('span.slider');
                 var s = getSides($elem, $slider);
                 $slider.css('left', value ? s.right : s.left);
             });
