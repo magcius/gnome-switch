@@ -51,6 +51,7 @@ define(['jquery'], function($) {
                 $elem.text('');
 
                 var classNames = $elem.attr('class');
+                var activated = $elem.hasClass('activated');
 
                 $elem
                     .removeClass()
@@ -68,7 +69,8 @@ define(['jquery'], function($) {
 
                 if (contents)
                     methods.customize.call($elem, contents, classNames);
-                methods.activate.call($elem, $elem.hasClass('activated'));
+                if (activated)
+                    methods.activate.call($elem, true);
 
                 $slider.on('mousedown', function(e) {
                     data.initialActivated = data.activated;
