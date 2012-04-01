@@ -138,9 +138,9 @@ define(['jquery'], function($) {
                 var $elem = $(this);
 
                 var data = $elem.data('switch');
-                data.customized = true;
+                var customized = !!label || !!styleClass;
 
-                $elem.addClass('customized');
+                $elem.toggleClass('customized', customized);
 
                 var $customContent = $elem.find('.custom-content');
                 $customContent.text(label);
