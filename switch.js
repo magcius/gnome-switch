@@ -19,7 +19,7 @@ define(['jquery'], function($) {
                 var data = $elem.data('switch');
                 if (!data) {
                     data = {};
-                    data.activated = false;
+                    data.activated = undefined;
                     data.customized = null;
                     $elem.data('switch', data);
                 }
@@ -69,8 +69,7 @@ define(['jquery'], function($) {
 
                 if (contents)
                     methods.customize.call($elem, contents, classNames);
-                if (activated)
-                    methods.activate.call($elem, true);
+                methods.activate.call($elem, activated);
 
                 $slider.on('mousedown', function(e) {
                     data.initialActivated = data.activated;
@@ -88,7 +87,7 @@ define(['jquery'], function($) {
 
                 $elem.on('click', function(e) {
                     var doToggle;
-                    var isActivated = data.activated;
+                    var isActivated = !!data.activated;
 
                     if (data.customized !== null)
                         return true;
