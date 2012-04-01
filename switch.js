@@ -26,7 +26,7 @@ define(['jquery'], function($) {
 
                 function mouseup(e) {
                     $slider.addClass('not-dragging');
-                    $(document).unbind('mousemove.slider').unbind('mouseup.slider');
+                    $(document).off('mousemove.slider').off('mouseup.slider');
                     var s = getSides($elem, $slider);
                     $slider.css('left', data.activated ? s.right : s.left);
                     if (data.activated != data.initialActivated)
@@ -57,12 +57,12 @@ define(['jquery'], function($) {
                     .css({'cursor': 'default',
                           '-moz-user-select': 'none'})
                     .attr('unselectable', 'on')
-                    .bind('selectstart', function() { return false; });
+                    .on('selectstart', function() { return false; });
 
                 methods.activate.call($elem, $elem.hasClass('activated'));
                 methods.insensitive.call($elem, $elem.hasClass('insensitive'));
 
-                $slider.bind('mousedown', function(e) {
+                $slider.on('mousedown', function(e) {
                     if (data.insensitive)
                         return true;
 
@@ -72,14 +72,14 @@ define(['jquery'], function($) {
                     data.initialLeft = left;
                     $slider.css({'position': 'absolute', 'left': left});
                     $slider.removeClass('not-dragging');
-                    $(document).bind({
+                    $(document).on({
                         'mousemove.slider': mousemove,
                         'mouseup.slider': mouseup
                     });
                     return false;
                 });
 
-                $elem.bind('click', function(e) {
+                $elem.on('click', function(e) {
                     var doToggle;
                     var isActivated = data.activated;
                     if (data.insensitive)
