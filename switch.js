@@ -20,7 +20,6 @@ define(['jquery'], function($) {
                 if (!data) {
                     data = {};
                     data.activated = undefined;
-                    data.insensitive = false;
                     $elem.data('switch', data);
                 }
 
@@ -60,12 +59,8 @@ define(['jquery'], function($) {
                     .on('selectstart', function() { return false; });
 
                 methods.activate.call($elem, $elem.hasClass('activated'));
-                methods.insensitive.call($elem, $elem.hasClass('insensitive'));
 
                 $slider.on('mousedown', function(e) {
-                    if (data.insensitive)
-                        return true;
-
                     data.initialActivated = data.activated;
                     data.initialPageX = e.pageX;
                     var left = $slider.position().left;
@@ -82,8 +77,6 @@ define(['jquery'], function($) {
                 $elem.on('click', function(e) {
                     var doToggle;
                     var isActivated = data.activated;
-                    if (data.insensitive)
-                        return true;
 
                     if (data.initialPageX === undefined) {
                         doToggle = true;
@@ -123,16 +116,7 @@ define(['jquery'], function($) {
                 $slider.css('left', value ? s.right : s.left);
                 return this;
             });
-        },
-
-        insensitive: function(value) {
-            return this.each(function() {
-                var $elem = $(this);
-                var data = $elem.data('switch');
-                data.insensitive = value;
-                $elem.toggleClass('insensitive', value);
-            });
-        },
+        }
     };
 
     $.fn.switchify = function(method) {

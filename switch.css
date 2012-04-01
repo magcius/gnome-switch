@@ -89,34 +89,3 @@
     border-radius: 4px 0 0 4px;
     background-color: #4a90d9;
 }
-
-._gnome-switch.insensitive .off, ._gnome-switch.insensitive .on {
-    float: none;
-    /* 80px - 4px */
-    width: 76px;
-    text-shadow: none;
-    border-radius: 4px;
-    border-style: solid;
-}
-
-._gnome-switch.insensitive.activated .off,
-._gnome-switch.insensitive .on {
-    display: none;
-}
-
-._gnome-switch.insensitive .off,
-._gnome-switch.insensitive.activated .on {
-    display: block;
-}
-
-._gnome-switch.insensitive.activated .on {
-    color: #235493;
-}
-
-._gnome-switch.insensitive .off {
-    color: #666666;
-}
-
-._gnome-switch.insensitive .slider {
-    visibility: hidden;
-}
