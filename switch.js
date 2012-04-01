@@ -19,8 +19,8 @@ define(['jquery'], function($) {
                 var data = $elem.data('switch');
                 if (!data) {
                     data = {};
-                    data.activated = undefined;
-                    data.customized = undefined;
+                    data.activated = false;
+                    data.customized = false;
                     $elem.data('switch', data);
                 }
 
@@ -29,7 +29,7 @@ define(['jquery'], function($) {
                     $(document).off('mousemove.slider').off('mouseup.slider');
                     var s = getSides($elem, $slider);
                     $slider.css('left', data.activated ? s.right : s.left);
-                    if (data.activated != data.initialActivated)
+                    if (data.activated !== data.initialActivated)
                         $elem.trigger('changed', data.activated);
                     return false;
                 }
@@ -96,7 +96,7 @@ define(['jquery'], function($) {
                     } else {
                         // Make sure we didn't drag before toggling.
                         var travelDistance = Math.abs(e.pageX - data.initialPageX);
-                        doToggle = travelDistance < 4 && isActivated == data.initialActivated;
+                        doToggle = travelDistance < 4 && isActivated === data.initialActivated;
 
                         delete data.initialActivated;
                         delete data.initialPageX;
@@ -117,7 +117,7 @@ define(['jquery'], function($) {
                 var $elem = $(this);
 
                 var data = $elem.data('switch');
-                if (data.activated == value)
+                if (data.activated === value)
                     return;
 
                 data.activated = value;
