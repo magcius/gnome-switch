@@ -10,12 +10,6 @@
     margin-top: 10px;
     font-size: 14px;
     line-height: 1.6;
-
-    -webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    -moz-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    -ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    -o-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 /* create a new BFC to have floating label work correctly.
