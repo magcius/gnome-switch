@@ -20,7 +20,7 @@ define(['jquery'], function($) {
                 if (!data) {
                     data = {};
                     data.activated = false;
-                    data.customized = false;
+                    data.customized = null;
                     $elem.data('switch', data);
                 }
 
@@ -136,19 +136,22 @@ define(['jquery'], function($) {
         customize: function(label, styleClass) {
             return this.each(function() {
                 var $elem = $(this);
+                var $customContent = $elem.find('.custom-content');
 
                 var data = $elem.data('switch');
                 var customized = !!label || !!styleClass;
 
-                $elem.toggleClass('customized', customized);
+                if (data.customized) {
+                    $customContent.text('').removeClass(data.customized.styleClass);
+                    $elem.removeClass('customized').removeClass(data.customized.styleClass);
+                    data.customized = null;
+                }
 
-                var $customContent = $elem.find('.custom-content');
-                $customContent.text(label);
-
-                $customContent.removeClass();
-                $customContent.addClass('custom-content');
-                if (styleClass)
-                    $customContent.addClass(styleClass);
+                if (customized) {
+                    $customContent.text(label).addClass(styleClass);
+                    $elem.addClass('customized').addClass(styleClass);
+                    data.customized = { label: label, styleClass: styleClass };
+                }
             });
         }
     };
