@@ -13,18 +13,31 @@ define(['jquery'], function($) {
     var methods = {
         init: function() {
             return this.each(function() {
+                function setLeft(left) {
+                    var s = getSides($elem, $slider);
+
+                    $slider.css('left', left);
+
+                    $coverLeft.css('width', left - s.left);
+                    $coverRight.css('width', s.right - left);
+                }
+
                 var $elem = $(this);
-                var $slider = $('<span>', {'class': 'slider not-dragging'});
+                var $slider = $('<span>', {'class': 'slider'});
+                var $coverLeft = $('<span>', {'class': 'cover left'});
+                var $coverRight = $('<span>', {'class': 'cover right'});
+
                 var data = $elem.data('switch');
                 if (!data) {
                     data = {};
+                    data.setLeft = setLeft;
                     data.activated = undefined;
                     data.customized = null;
                     $elem.data('switch', data);
                 }
 
                 function mouseup(e) {
-                    $slider.addClass('not-dragging');
+                    $elem.removeClass('dragging');
                     $(document).off('mousemove.slider').off('mouseup.slider');
                     var s = getSides($elem, $slider);
                     var x = e.pageX - data.initialPageX + data.initialLeft;
@@ -34,12 +47,12 @@ define(['jquery'], function($) {
                 }
 
                 function mousemove(e) {
-                    var s = getSides($elem, $slider);
                     var x = e.pageX - data.initialPageX + data.initialLeft;
+                    var s = getSides($elem, $slider);
                     if (x < s.left)  x = s.left;
                     if (x > s.right) x = s.right;
 
-                    $slider.css('left', x);
+                    setLeft(x);
                     return false;
                 }
 
@@ -55,6 +68,8 @@ define(['jquery'], function($) {
                     .append($('<span>', {'class': 'on'}).text("ON"))
                     .append($('<span>', {'class': 'off'}).text("OFF"))
                     .append($('<span>', {'class': 'custom-content'}))
+                    .append($coverLeft)
+                    .append($coverRight)
                     .append($slider)
 
                 // Disable selection.
@@ -72,8 +87,7 @@ define(['jquery'], function($) {
                     data.initialPageX = e.pageX;
                     var left = $slider.position().left;
                     data.initialLeft = left;
-                    $slider.css({'position': 'absolute', 'left': left});
-                    $slider.removeClass('not-dragging');
+                    $elem.addClass('dragging');
                     $(document).on({
                         'mousemove.slider': mousemove,
                         'mouseup.slider': mouseup
@@ -117,7 +131,7 @@ define(['jquery'], function($) {
 
                 var $slider = $elem.find('span.slider');
                 var s = getSides($elem, $slider);
-                $slider.css('left', value ? s.right : s.left);
+                data.setLeft(value ? s.left : s.right);
 
                 if (data.activated === value)
                     return;

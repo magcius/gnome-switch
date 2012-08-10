@@ -28,7 +28,7 @@
     display: block;
 }
 
-._gnome-switch .slider.not-dragging {
+._gnome-switch:not(.dragging) .slider {
     -webkit-transition: left 0.2s ease-in-out;
     -moz-transition: left 0.2s ease-in-out;
     -ms-transition: left 0.2s ease-in-out;
@@ -36,15 +36,39 @@
     transition: left 0.2s ease-in-out;
 }
 
+._gnome-switch:not(.dragging) .cover {
+    -webkit-transition: width 0.2s ease-in-out;
+    -moz-transition: width 0.2s ease-in-out;
+    -ms-transition: width 0.2s ease-in-out;
+    -o-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+}
+
 ._gnome-switch .slider {
     position: absolute;
-    /* (80px / 2) */
-    width: 40px;
     top: -3px;
     bottom: -3px;
+    width: 40px;
 
     border: 3px solid #edd400;
     border-radius: 6px;
+}
+
+._gnome-switch .cover {
+    position: absolute;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
+
+._gnome-switch .cover.left {
+    left: 0px;
+    border-radius: 4px 0 0 4px;
+}
+
+._gnome-switch .cover.right {
+    right: 0px;
+    border-radius: 0 4px 4px 0;
 }
 
 ._gnome-switch .off,
@@ -101,6 +125,7 @@
 
 ._gnome-switch.customized .on,
 ._gnome-switch.customized .off,
-._gnome-switch.customized .slider {
+._gnome-switch.customized .slider,
+._gnome-switch.customized .cover {
     display: none;
 }
