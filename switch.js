@@ -28,9 +28,9 @@ define(['jquery'], function($) {
                     $slider.addClass('not-dragging');
                     $(document).off('mousemove.slider').off('mouseup.slider');
                     var s = getSides($elem, $slider);
-                    $slider.css('left', data.activated ? s.right : s.left);
-                    if (data.activated !== data.initialActivated)
-                        $elem.trigger('changed', data.activated);
+                    var x = e.pageX - data.initialPageX + data.initialLeft;
+                    var newActivated = x >= s.center;
+                    methods.activate.call($elem, newActivated);
                     return false;
                 }
 
@@ -39,9 +39,6 @@ define(['jquery'], function($) {
                     var x = e.pageX - data.initialPageX + data.initialLeft;
                     if (x < s.left)  x = s.left;
                     if (x > s.right) x = s.right;
-
-                    data.activated = x >= s.center;
-                    $elem.toggleClass('activated', data.activated);
 
                     $slider.css('left', x);
                     return false;
@@ -118,6 +115,11 @@ define(['jquery'], function($) {
                 var $elem = $(this);
 
                 var data = $elem.data('switch');
+
+                var $slider = $elem.find('span.slider');
+                var s = getSides($elem, $slider);
+                $slider.css('left', value ? s.right : s.left);
+
                 if (data.activated === value)
                     return;
 
@@ -125,10 +127,6 @@ define(['jquery'], function($) {
 
                 $elem.trigger('changed', value);
                 $elem.toggleClass('activated', value);
-
-                var $slider = $elem.find('span.slider');
-                var s = getSides($elem, $slider);
-                $slider.css('left', value ? s.right : s.left);
             });
         },
 
