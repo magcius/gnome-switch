@@ -29,22 +29,22 @@
 }
 
 ._gnome-switch .slider.not-dragging {
-    -webkit-transition: left 0.2s ease-in-out;
-    -moz-transition: left 0.2s ease-in-out;
-    -ms-transition: left 0.2s ease-in-out;
-    -o-transition: left 0.2s ease-in-out;
-    transition: left 0.2s ease-in-out;
+    -webkit-transition: left 0.2s ease-in-out, border-color ease-in-out;
+    -moz-transition: left 0.2s ease-in-out, border-color ease-in-out;
+    -ms-transition: left 0.2s ease-in-out, border-color ease-in-out;
+    -o-transition: left 0.2s ease-in-out, border-color ease-in-out;
+    transition: left 0.2s ease-in-out, border-color ease-in-out;
 }
 
 ._gnome-switch .slider {
     position: absolute;
-    /* (80px / 2) */
-    width: 40px;
-    top: -3px;
-    bottom: -3px;
+    /* (80px / 2) - 3 */
+    width: 37px;
+    top: 0px;
+    bottom: 0px;
 
-    border: 3px solid #edd400;
-    border-radius: 6px;
+    border: 3px solid #aaaaaa;
+    border-radius: 4px;
 }
 
 ._gnome-switch .off,
@@ -63,6 +63,15 @@
 ._gnome-switch .on {
     /* (80px / 2) - 2px */
     width: 38px;
+
+    background-color: #000000;
+    border-color: #2e3436;
+
+    -webkit-transition: background-color 0.2s ease-in-out;
+    -moz-transition: background-color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
 }
 
 ._gnome-switch .custom-content {
@@ -85,18 +94,22 @@
 
 ._gnome-switch .on {
     float: right;
-    border-color: #3465a4;
     border-left-style: none;
     border-radius: 0 4px 4px 0;
-    background-color: #4a90d9;
 }
 
 ._gnome-switch .off {
     float: left;
-    border-color: #2e3436;
     border-right-style: none;
     border-radius: 4px 0 0 4px;
-    background-color: #000000;
+}
+
+._gnome-switch.activated .on {
+    background-color: #4a90d9;
+}
+
+._gnome-switch:not(.activated) .off {
+    background-color: #666666;
 }
 
 ._gnome-switch.customized .on,

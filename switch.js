@@ -4,8 +4,8 @@ define(['jquery'], function($) {
     "use strict";
 
     function getSides($elem, $slider) {
-        var left = -3;
-        var right = $elem.outerWidth() - $slider.outerWidth() + 3;
+        var left = 0;
+        var right = $elem.outerWidth() - $slider.outerWidth() + 2;
         var center = right / 2 + left;
         return {left: left, right: right, center: center};
     }
