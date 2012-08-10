@@ -4,8 +4,8 @@ define(['jquery'], function($) {
     "use strict";
 
     function getSides($elem, $slider) {
-        var left = -2;
-        var right = $elem.outerWidth() - $slider.outerWidth() + 2;
+        var left = -3;
+        var right = $elem.outerWidth() - $slider.outerWidth() + 3;
         var center = right / 2 + left;
         return {left: left, right: right, center: center};
     }
@@ -15,7 +15,6 @@ define(['jquery'], function($) {
             return this.each(function() {
                 var $elem = $(this);
                 var $slider = $('<span>', {'class': 'slider not-dragging'});
-                $slider.append($('<span>', {'class': 'handle'}));
                 var data = $elem.data('switch');
                 if (!data) {
                     data = {};

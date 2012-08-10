@@ -38,28 +38,13 @@
 
 ._gnome-switch .slider {
     position: absolute;
-    /* (80px / 2) - 2px */
-    width: 38px;
-    top: -2px;
-    bottom: -2px;
+    /* (80px / 2) */
+    width: 40px;
+    top: -3px;
+    bottom: -3px;
 
-    border: 3px solid #5f5f5f;
-    background-color: #000;
-    border-radius: 4px;
-}
-
-._gnome-switch .slider .handle {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -5px;
-    margin-top: -4px;
-    width: 2px;
-    height: 8px;
-    border-width: 0 6px 0 2px;
-    border-style: none double none solid;
-    border-color: #5f5f5f;
+    border: 3px solid #edd400;
+    border-radius: 6px;
 }
 
 ._gnome-switch .off,
@@ -76,7 +61,7 @@
 
 ._gnome-switch .off,
 ._gnome-switch .on {
-    /* 80px / 2 - 2px */
+    /* (80px / 2) - 2px */
     width: 38px;
 }
 
@@ -98,20 +83,20 @@
     border-radius: 4px;
 }
 
-._gnome-switch .off {
+._gnome-switch .on {
     float: right;
-    border-color: #2e3436;
+    border-color: #3465a4;
     border-left-style: none;
     border-radius: 0 4px 4px 0;
-    background-color: #000000;
+    background-color: #4a90d9;
 }
 
-._gnome-switch .on {
+._gnome-switch .off {
     float: left;
-    border-color: #3465a4;
+    border-color: #2e3436;
     border-right-style: none;
     border-radius: 4px 0 0 4px;
-    background-color: #4a90d9;
+    background-color: #000000;
 }
 
 ._gnome-switch.customized .on,
